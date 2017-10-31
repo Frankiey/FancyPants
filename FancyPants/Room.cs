@@ -11,10 +11,11 @@ namespace FancyPants
 
         public Dictionary<string, Action> Actions = new Dictionary<string, Action>()
         {
-            {"north", () => Game.CurrentGame.Move(EDirection.North) },
-            {"east", () => Game.CurrentGame.Move(EDirection.East) },
-            {"south",() => Game.CurrentGame.Move(EDirection.South) },
-            {"west",() => Game.CurrentGame.Move(EDirection.West) }
+            //{"north", () => Game.CurrentGame.Move(EDirection.North) },
+            //{"east", () => Game.CurrentGame.Move(EDirection.East) },
+            //{"south",() => Game.CurrentGame.Move(EDirection.South) },
+            //{"west",() => Game.CurrentGame.Move(EDirection.West) },
+            {"kill monster", () => Game.CurrentGame.KillMonster() }
         };
 
         // List of actions and results
