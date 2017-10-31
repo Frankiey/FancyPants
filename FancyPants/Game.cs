@@ -4,9 +4,9 @@ namespace FancyPants
 {
     public class Game
     {
+        public static Game CurrentGame;
+
         private string _name;
-        private string _house;
-        private string _street;
         private Room[][] _rooms;
         public string Level { get; private set; }
         private (int x, int y) _position = (0, 0);
@@ -15,10 +15,13 @@ namespace FancyPants
 
         private DateTime _time;
 
-        public enum Direction { Up, Down, Left, Right };
+       
 
         public Game()
         {
+            CurrentGame = this;
+            Console.CursorSize = 20;
+            Console.WindowWidth = 150;
             // Init the Rooms jagged array.
             _rooms = new Room[_gridSize][];
             for (int x = 0; x < _gridSize; x++)
@@ -46,15 +49,11 @@ namespace FancyPants
                     break;
                 }
             }
-            Console.WriteLine("Wat is je house?");
-            _house = Console.ReadLine();
-            Console.WriteLine("Wat is je street");
-            _street = Console.ReadLine();
-            Console.WriteLine("Wat is je level");
-            Level = Console.ReadLine();
 
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Welcome {_name}");
-            Console.WriteLine($"Naam:{_name}, House: {_house}, Street: {_street}, Level: {Level}");
+            Console.ForegroundColor = ConsoleColor.White;
+          //  Console.WriteLine($"Naam:{_name}, House: {_house}, Street: {_street}, Level: {Level}");
 
             _time = DateTime.Now;
         }
@@ -102,43 +101,56 @@ namespace FancyPants
             }
         }
 
-        public void ProcessInput()
+        public void Move(EDirection direction)
         {
             (int x, int y) dir = (0, 0);
-            bool getInput = true;
-            while (getInput)
+            switch (direction)
             {
-                Console.WriteLine("Enter a direction to move: Up | Down | Left | Right");
-                string move = Console.ReadLine();
-                move = move.ToLower();
-                switch (move)
-                {
-                    case "up":
-                        dir = (0, 1);
-                        getInput = false;
-                        break;
-                    case "down":
-                        dir = (0, -1);
-                        getInput = false;
-                        break;
-                    case "left":
-                        dir = (-1, 0);
-                        getInput = false;
-                        break;
-                    case "right":
-                        dir = (1, 0);
-                        getInput = false;
-                        break;
-                    default:
-                        Console.WriteLine("Please enter a valid move");
-                        break;
-                }
+                case EDirection.North:
+                    dir = (0, 1);
+                    break;
+                case EDirection.South:
+                    dir = (0, -1);
+                    break;
+                case EDirection.West:
+                    dir = (-1, 0);
+                    break;
+                case EDirection.East:
+                    dir = (1, 0);
+                    break;
             }
 
             if (_position.x + dir.x <= _gridSize - 1 && _position.x + dir.x >= 0)
                 _position.x += dir.x;
             if (_position.y + dir.y <= _gridSize - 1 && _position.y + dir.y >= 0)
                 _position.y += dir.y;
+
+
+        }
+
+        public void ProcessInput()
+        {
+            bool getInput = true;
+
+            while (true)
+            {
+                Console.WriteLine("Enter a direction to move: North | West | South | East");
+
+                string move = Console.ReadLine();
+                move = move.ToLower();
+
+                // Get the corresponding action from the room actions dictionary.
+                if (_rooms[_position.x][_position.y].Actions.TryGetValue(move, out var action))
+                {
+                    action();
+                    break;
+                }
+                else
+                {
+
+                }
+
+            }
         }
 
         public void End()
@@ -147,7 +159,7 @@ namespace FancyPants
 
             TimeSpan timeSpent = currentTime - _time;
 
-            Console.WriteLine($"Naam:{_name}, House: {_house}, Street: {_street}, Level: {Level}");
+            Console.WriteLine($"Naam:{_name}");
             Console.WriteLine($"Time: {timeSpent.TotalSeconds} seconds");
 
             Console.ReadLine();
