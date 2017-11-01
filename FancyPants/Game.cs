@@ -6,7 +6,10 @@ namespace FancyPants
     public class Game
     {
         public static Game CurrentGame;
-        public static Room CurrentRoom;
+        public Room CurrentRoom;
+        public static Commands Commands = new Commands();
+
+        public string[] CurrentArgs;
 
         private string _name;
         private Room[][] _rooms;
@@ -15,11 +18,15 @@ namespace FancyPants
         private (int x, int y) _goalPos = (2, 2);
         private int _gridSize = 10;
 
+        public Player Player { get; }
+
         private DateTime _time;
 
         public Game()
         {
             CurrentGame = this;
+            Commands.CurrGame = this;
+            Player = new Player();
             Console.CursorSize = 20;
             Console.WindowWidth = 150;
             // Init the Rooms jagged array.
@@ -150,60 +157,40 @@ namespace FancyPants
                 Console.Write(">");
               
                 string move = Console.ReadLine();
-
+                
                 Console.ForegroundColor = ConsoleColor.White;
 
                 move = move?.ToLower();
 
-                switch (move)
-                {
-                    case "help": Help();
-                        continue;
-                    case "quit": Quit();
-                        continue;
-                }
+                string[] args = move?.Split(' ');
+                CurrentArgs = args;
 
-                // Get the corresponding action from the room actions dictionary.
-                if (_rooms[_position.x][_position.y].Actions.TryGetValue(move, out var action))
+                if (args != null)
                 {
-                    action();
-                    break;
+                    switch (args[0])
+                    {
+                        case "help":
+                            Help();
+                            continue;
+                        case "quit":
+                            Quit();
+                            continue;
+                    }
+
+                    // Get the corresponding action from the room actions dictionary.
+                    if (_rooms[_position.x][_position.y].Actions.TryGetValue(args[0], out var action))
+                    {
+                        action();
+                        break;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("This is not a valid move");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
                 }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("This is not a valid move");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                
             }
-        }
-
-        public void KillMonster()
-        {
-            string str = "Monster has been killed!!! +2 xp";
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(str);
-            Console.ForegroundColor = ConsoleColor.White;
-            CurrentRoom.Actions.Remove("kill monster");
-            CurrentRoom.Actions.Add("get key", () => Game.CurrentGame.GetKey());
-        }
-
-        public void GetKey()
-        {
-            string str = "You found a Key!!!";
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(str);
-            Console.ForegroundColor = ConsoleColor.White;
-
-            CurrentRoom.Actions.Add("north", () => Game.CurrentGame.Move(EDirection.North));
-            CurrentRoom.Actions.Add("west", () => Game.CurrentGame.Move(EDirection.West));
-            CurrentRoom.Actions.Add("south", () => Game.CurrentGame.Move(EDirection.South));
-            CurrentRoom.Actions.Add("east", () => Game.CurrentGame.Move(EDirection.East));
-
-            CurrentRoom.Actions.Remove("get key");
         }
 
         private void Help()

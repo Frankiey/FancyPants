@@ -8,6 +8,8 @@ namespace FancyPants
     {
         private string _name;
         public Game CurrGame { get; set; }
+        public List<IMonster> MonsterList { get; set; }
+        public List<IItem> ItemList { get; set; }
 
         public Dictionary<string, Action> Actions = new Dictionary<string, Action>()
         {
@@ -15,7 +17,12 @@ namespace FancyPants
             //{"east", () => Game.CurrentGame.Move(EDirection.East) },
             //{"south",() => Game.CurrentGame.Move(EDirection.South) },
             //{"west",() => Game.CurrentGame.Move(EDirection.West) },
-            {"kill monster", () => Game.CurrentGame.KillMonster() }
+            //{"kill monster", () => Game.CurrentGame.KillMonster()},
+            //{"look around", () => Game.CurrentGame.LookAround()},
+            //{"hit", () => Game.CurrentGame.Hit(Game.CurrentGame.CurrentArgs)}
+            {"kill", () => Game.Commands.KillMonster()},
+            {"look", () => Game.Commands.LookAround()},
+            {"hit", () => Game.Commands.Hit(Game.CurrentGame.CurrentArgs)}
         };
 
         // List of actions and results
@@ -26,9 +33,39 @@ namespace FancyPants
 
         public void DoSomething()
         {
-    
-        }
 
+        }
+    }
+
+    public interface IMonster
+    {
+        string Name { get; set; }
+        int Health { get; set; }
+        List<IItem> DropTable { get; set; }
+    }
+
+    public class Minatour : IMonster
+    {
+        public string Name { get; set; }
+        public int Health { get; set; }
+        public List<IItem> DropTable { get; set; }
+
+        public Minatour()
+        {
+            // Minatour spawned.
+        }
+    }
+
+    public interface IItem
+    {
+        string Name { get; set; }
+    }
+
+    public class Player
+    {
+        public int Health { get; set; }
+        public List<IItem> Bag { get; set; }
 
     }
+
 }
