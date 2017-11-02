@@ -28,17 +28,9 @@ namespace FancyPants.GameLogic
             CurrentGame = this;
             Commands.CurrGame = this;
             Player = new Player();
-            Console.CursorSize = 10;
-            Console.WindowWidth = 150;
-            Console.WindowHeight = 35;
-            // Init the Rooms jagged array.
-            _rooms = new Room[_gridSize][];
-            for (int x = 0; x < _gridSize; x++)
-            {
-                _rooms[x] = new Room[_gridSize];
-                for (int y = 0; y < _gridSize; y++)
-                    _rooms[x][y] = new Room();
-            }
+
+            // Make the rooms jagged array.
+            _rooms = RoomsFactory.MakeRooms(_gridSize);
         }
 
         public string Level { get; private set; }
@@ -88,7 +80,7 @@ namespace FancyPants.GameLogic
                 bool done = CheckGoalState(_position);
                 if (done)
                     return;
-                DisplayCurrentPos(_position);
+                //DisplayCurrentPos(_position);
                 ProcessInput();
             }
         }

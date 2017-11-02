@@ -11,6 +11,11 @@ namespace FancyPants
         static void Main(string[] args)
         {
             Console.Title = "Fancy Game";
+
+            Console.CursorSize = 10;
+            Console.WindowWidth = 150;
+            Console.WindowHeight = 35;
+
             string str = @"
 
 ██████╗ ███████╗███████╗████████╗██╗███╗   ██╗██╗   ██╗    ██████╗ 

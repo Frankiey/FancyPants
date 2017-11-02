@@ -48,6 +48,8 @@
     <Compile Include="GameLogic\Commands.cs" />
     <Compile Include="Enums\EDirection.cs" />
     <Compile Include="GameLogic\Game.cs" />
+    <Compile Include="GameLogic\RoomFactory.cs" />
+    <Compile Include="GameLogic\RoomsFactory.cs" />
     <Compile Include="Interfaces\IItem.cs" />
     <Compile Include="Interfaces\IMonster.cs" />
     <Compile Include="Items\Item.cs" />

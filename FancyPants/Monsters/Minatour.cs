@@ -13,11 +13,6 @@ namespace FancyPants.Monsters
         public List<IItem> DropTable { get; set; }
         public string Description { get; set; }
 
-        public Minatour()
-        {
-            // Minatour spawned.
-        }
-
         public void Attack()
         {
             Random random = new Random();
@@ -34,7 +29,7 @@ namespace FancyPants.Monsters
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"You hit the {Name} for {damage} damage.");
             Console.ForegroundColor = ConsoleColor.White;
-            if(Health <= 0)
+            if (Health <= 0)
                 Die();
         }
 
@@ -56,13 +51,12 @@ namespace FancyPants.Monsters
 
             Game.CurrentGame.Player.AddXp(10);
 
-            Game.CurrentGame.CurrentRoom.ItemList.Add(new Key(){Name = "universalkey", Damage = 1});
+            Game.CurrentGame.CurrentRoom.ItemList.Add(new Key {Name = "universalkey", Damage = 1});
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("The vex drops a key onto the ground.");
             Console.ForegroundColor = ConsoleColor.White;
 
             Game.CurrentGame.CurrentRoom.MonsterList.Remove(this);
         }
-
     }
 }
