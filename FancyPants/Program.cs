@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Security;
 using System.Runtime.InteropServices.WindowsRuntime;
+using FancyPants.GameLogic;
 
 namespace FancyPants
 {

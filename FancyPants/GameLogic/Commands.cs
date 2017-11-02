@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FancyPants.Interfaces;
 
-namespace FancyPants
+namespace FancyPants.GameLogic
 {
     public class Commands
     {
@@ -122,18 +120,23 @@ namespace FancyPants
             if (args.Length < 2)
             {
                 Console.WriteLine("Can't get that, type 'get *item here*'");
-            };
+            }
+            ;
 
-            IItem item = CurrGame.CurrentRoom.ItemList.First(x => x.Name == args[1]);
-            if(item == null)
+            IItem item;
+            try
+            {
+                item = CurrGame.CurrentRoom.ItemList.First(x => x.Name == args[1]);
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Cant get that item.");
                 return;
             }
-            else
-            {
-                item.Get();
-            }
+
+
+            item.Get();
+
             // todo get all items in the room and map arg[1] to action
         }
 

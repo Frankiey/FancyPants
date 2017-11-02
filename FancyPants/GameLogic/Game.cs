@@ -1,7 +1,7 @@
 ﻿using System;
-using System.ComponentModel.Design;
+using FancyPants.Enums;
 
-namespace FancyPants
+namespace FancyPants.GameLogic
 {
     public class Game
     {
