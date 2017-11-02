@@ -27,8 +27,9 @@ namespace FancyPants
             CurrentGame = this;
             Commands.CurrGame = this;
             Player = new Player();
-            Console.CursorSize = 20;
+            Console.CursorSize = 10;
             Console.WindowWidth = 150;
+            Console.WindowHeight = 35;
             // Init the Rooms jagged array.
             _rooms = new Room[_gridSize][];
             for (int x = 0; x < _gridSize; x++)
@@ -44,7 +45,6 @@ namespace FancyPants
             while (true)
             {
                 Console.WriteLine("Wat is je naam?");
-
                 _name = Console.ReadLine();
                 if (string.IsNullOrEmpty(_name))
                 {
@@ -198,7 +198,7 @@ namespace FancyPants
             Console.WriteLine("This is what you can do: NOTHING");
         }
 
-        private void Quit()
+        public void Quit()
         {
             Environment.Exit(0);
         }
