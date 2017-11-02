@@ -79,6 +79,7 @@ namespace FancyPants.GameLogic
             foreach (IItem item in CurrGame.Player.Bag)
                 Console.Write($"| {item.Name} ");
             Console.Write("| \n");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         /// <summary>

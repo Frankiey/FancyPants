@@ -57,7 +57,7 @@ namespace FancyPants.GameLogic
         {
             while (true)
             {
-                Console.WriteLine("Wat is je naam?");
+                Console.WriteLine("What is your name?");
                 _name = Console.ReadLine();
                 if (string.IsNullOrEmpty(_name))
                     Console.WriteLine("Please give a valid name...");
@@ -80,7 +80,7 @@ namespace FancyPants.GameLogic
                 bool done = CheckGoalState(_position);
                 if (done)
                     return;
-                //DisplayCurrentPos(_position);
+               // DisplayCurrentPos(_position);
                 ProcessInput();
             }
         }

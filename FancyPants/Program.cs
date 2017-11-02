@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Security;
-using System.Runtime.InteropServices.WindowsRuntime;
 using FancyPants.GameLogic;
 
 namespace FancyPants
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.Title = "Fancy Game";
 
             Console.CursorSize = 10;
             Console.WindowWidth = 150;
             Console.WindowHeight = 35;
+
+            Console.Clear();
 
             string str = @"
 
@@ -26,7 +25,7 @@ namespace FancyPants
 ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝╚═╝  ╚═══╝   ╚═╝       ╚══════╝
                                                                    
 ";
-            string gun = @"         `..`                        `..`         
+            string logo = @"         `..`                        `..`         
       /hNMMMMmy/`                `:smMMMMNh/      
     `dMMMMMMMMMMMh-   `:++:`   .hNMMMMMMMMMMd.    
     hMMMMMMMMMMMMM/  sMMMMMMs  :MMMMMMMMMMMMMd    
@@ -49,19 +48,14 @@ namespace FancyPants
                       .://:.                      
                                                
  ";
-            for(int i = 0; i < 1; i++)
-            {
-                Console.Write(gun);
-            }
-            
+            Console.Write(logo);
+
             Console.WriteLine(str);
             Console.Write("\n");
-
             Game game = new Game();
             game.Start();
             game.Loop();
             game.End();
         }
-
     }
 }
