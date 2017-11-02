@@ -9,16 +9,17 @@ namespace FancyPants.GameLogic
     {
         public int Health { get; set; } = 10;
 
-        public List<IItem> Bag { get; set; } = new List<IItem>()
+        public List<IItem> Bag { get; set; } = new List<IItem>
         {
-            new Item() {Damage = 2, Description = "Two fists", Name = "fists"}
+            new Item {Damage = 2, Description = "Two fists", Name = "fists"}
         };
-        public int Xp { get; set; } = 0;
+
+        public int Xp { get; set; }
 
         public void DealDamage(int x)
         {
             Health -= x;
-            if(Health <= 0)
+            if (Health <= 0)
                 Die();
         }
 
@@ -55,7 +56,7 @@ namespace FancyPants.GameLogic
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Press any key to quit.");
             Console.ReadKey();
-            Game.CurrentGame.Quit();
+            Game.Commands.Quit();
         }
     }
 }

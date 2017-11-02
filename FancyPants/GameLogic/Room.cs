@@ -8,35 +8,34 @@ namespace FancyPants.GameLogic
 {
     public class Room
     {
-        private string _name;
         private string _description;
-        public Game CurrGame { get; set; }
+        private string _name;
 
-        public List<IMonster> MonsterList = new List<IMonster>()
+        public Dictionary<string, Action> Actions = new Dictionary<string, Action>
         {
-            new Minatour()
-            {
-                Name = "vex",
-                Health = 5,
-                Description = "There is an evil Vex minatour fuming with void energy",
-                DropTable = new List<IItem>()
-                {
-                    new Key()
-                }
-            }
+            {"look", () => Game.Commands.LookAround()},
+            {"hit", () => Game.Commands.Hit(Game.CurrentGame.CurrentArgs)},
+            {"get", () => Game.Commands.Get(Game.CurrentGame.CurrentArgs)},
+            {"bag", () => Game.Commands.Bag()}
         };
 
-        public List<IItem> ItemList = new List<IItem>()
+        public List<IItem> ItemList = new List<IItem>
         {
             new Sword()
         };
 
-        public Dictionary<string, Action> Actions = new Dictionary<string, Action>()
+        public List<IMonster> MonsterList = new List<IMonster>
         {
-            {"look", () => Game.Commands.LookAround()},
-            {"hit", () => Game.Commands.Hit(Game.CurrentGame.CurrentArgs)},
-            {"get", ()=> Game.Commands.Get(Game.CurrentGame.CurrentArgs) },
-            {"bag", () =>  Game.Commands.Bag()}
+            new Minatour
+            {
+                Name = "vex",
+                Health = 5,
+                Description = "There is an evil Vex minatour fuming with void energy",
+                DropTable = new List<IItem>
+                {
+                    new Key()
+                }
+            }
         };
 
         // List of actions and results
@@ -44,5 +43,7 @@ namespace FancyPants.GameLogic
         {
             _name = name;
         }
+
+        public Game CurrGame { get; set; }
     }
 }
