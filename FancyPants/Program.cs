@@ -8,7 +8,7 @@ namespace FancyPants
     {
         private static void Main(string[] args)
         {
-            Console.Title = "Fancy Game";
+            Console.Title = "Destiny 2";
 
             Console.CursorSize = 10;
             Console.WindowWidth = 150;
