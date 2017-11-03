@@ -7,7 +7,7 @@ namespace FancyPants.Items
 {
     public class Key : IItem
     {
-        public string Name { get; set; } = "universalkey";
+        public string Name { get; set; } = "roomkey";
         public string Description { get; set; } = "A shiney key";
         public int Damage { get; set; } = 1;
 

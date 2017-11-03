@@ -51,7 +51,7 @@ namespace FancyPants.Monsters
 
             Game.CurrentGame.Player.AddXp(10);
 
-            Game.CurrentGame.CurrentRoom.ItemList.Add(new Key {Name = "universalkey", Damage = 1});
+            Game.CurrentGame.CurrentRoom.ItemList.Add(new Key {Name = "roomkey", Damage = 1});
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("The vex drops a key onto the ground.");
             Console.ForegroundColor = ConsoleColor.White;

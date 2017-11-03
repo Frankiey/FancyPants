@@ -8,6 +8,10 @@ namespace FancyPants.GameLogic
 {
     public class RoomFactory
     {
+        /// <summary>
+        /// Make a new room with items and monsters included.
+        /// </summary>
+        /// <returns></returns>
         public static Room MakeRoom()
         {
             Dictionary<string, Action> actions = new Dictionary<string, Action>

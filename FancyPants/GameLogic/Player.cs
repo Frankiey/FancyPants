@@ -7,7 +7,7 @@ namespace FancyPants.GameLogic
 {
     public class Player
     {
-        public int Health { get; set; } = 10;
+        public int Health { get; set; } = 5;
 
         public List<IItem> Bag { get; set; } = new List<IItem>
         {

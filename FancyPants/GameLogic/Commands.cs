@@ -119,7 +119,7 @@ namespace FancyPants.GameLogic
                 // Try to get the first item that matches the given item name.
                 item = CurrGame.CurrentRoom.ItemList.First(x => x.Name == args[1]);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.WriteLine("Cant get that item.");
                 return;

@@ -11,12 +11,13 @@ namespace FancyPants.GameLogic
     {
         public static Game CurrentGame;
         public static Commands Commands = new Commands();
+
         private readonly int _gridSize = 10;
         private readonly Room[][] _rooms;
         private (int x, int y) _goalPos = (2, 2);
+        private (int x, int y) _position = (0, 0);
 
         private string _name;
-        private (int x, int y) _position = (0, 0);
 
         private DateTime _time;
 
